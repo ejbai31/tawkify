@@ -1,14 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Root from './components/root';
+import configureStore from './store/store';
 
-const Root = ({ store }) => (
-  <Provider store={store}>
-    <HashRouter>
-    </HashRouter>
-  </Provider>
-);
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => { 
+  let store = configureStore();
   const root = document.getElementById("root");
   ReactDOM.render(<Root />, root);
 });
