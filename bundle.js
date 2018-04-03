@@ -25538,6 +25538,16 @@ exports['default'] = thunk;
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _redux = __webpack_require__(67);
+
+var rootReducer = (0, _redux.combineReducers)({});
+
+exports.default = rootReducer;
+
 /***/ }),
 /* 115 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -25564,7 +25574,7 @@ var App = function App() {
     'div',
     null,
     _react2.default.createElement(_reactRouterDom.Route, { path: '/' }),
-    _react2.default.createElement(Switch, null)
+    _react2.default.createElement(_reactRouterDom.Switch, null)
   );
 };
 
