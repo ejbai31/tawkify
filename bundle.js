@@ -956,12 +956,16 @@ var _store = __webpack_require__(112);
 
 var _store2 = _interopRequireDefault(_store);
 
+var _application = __webpack_require__(123);
+
+var _application2 = _interopRequireDefault(_application);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 document.addEventListener("DOMContentLoaded", function () {
   var store = (0, _store2.default)();
   var root = document.getElementById("root");
-  _reactDom2.default.render(_react2.default.createElement(_root2.default, null), root);
+  _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 });
 
 /***/ }),
@@ -25579,14 +25583,21 @@ var _reactRedux = __webpack_require__(59);
 
 var _reactRouterDom = __webpack_require__(86);
 
+var _about = __webpack_require__(120);
+
+var _about2 = _interopRequireDefault(_about);
+
+var _navbar = __webpack_require__(122);
+
+var _navbar2 = _interopRequireDefault(_navbar);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
   return _react2.default.createElement(
     'div',
     null,
-    _react2.default.createElement(_reactRouterDom.Route, { path: '/' }),
-    _react2.default.createElement(_reactRouterDom.Switch, null)
+    _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _navbar2.default })
   );
 };
 
@@ -25606,9 +25617,217 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(67);
 
-var formDataReducer = (0, _redux.combineReducers)({});
+var _form_actions = __webpack_require__(118);
+
+var formDataReducer = function formDataReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  Object.freeze(state);
+  switch (action.type) {
+    case _form_actions.RECEIVE_FORM_DATA:
+      return {};
+    default:
+      return state;
+  }
+};
 
 exports.default = formDataReducer;
+
+/***/ }),
+/* 118 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var RECEIVE_FORM_DATA = exports.RECEIVE_FORM_DATA = 'RECEIVE_FORM_DATA';
+
+var receiveFormData = exports.receiveFormData = function receiveFormData(data) {
+  return {
+    type: RECEIVE_FORM_DATA,
+    data: data
+  };
+};
+
+var fetchFormData = exports.fetchFormData = function fetchFormData(data) {
+  return function (dispatch) {
+    dispatch(receiveFormData(data));
+  };
+};
+
+/***/ }),
+/* 119 */,
+/* 120 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var About = function (_React$Component) {
+  _inherits(About, _React$Component);
+
+  function About(props) {
+    _classCallCheck(this, About);
+
+    var _this = _possibleConstructorReturn(this, (About.__proto__ || Object.getPrototypeOf(About)).call(this, props));
+
+    _this.state = {
+      value: "",
+      fieldsValid: false
+    };
+    return _this;
+  }
+
+  _createClass(About, [{
+    key: "handleUserInput",
+    value: function handleUserInput(e) {
+      var name = e.target.name;
+      var value = e.target.value;
+      this.setState(_defineProperty({}, name, value));
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "div",
+        { className: "about" },
+        _react2.default.createElement(
+          "h2",
+          null,
+          "Tell us a bit about yourself"
+        ),
+        _react2.default.createElement(
+          "p",
+          null,
+          "Tell us a bit about yourself and who you'd like to meet. The more we know, the better. Be candid--this info is for our eyes only. Tawkify profiles and photos will forever be 100%  condifential."
+        ),
+        _react2.default.createElement(
+          "form",
+          { className: "about-form" },
+          _react2.default.createElement(
+            "label",
+            null,
+            "YOUR GENDER",
+            _react2.default.createElement(
+              "select",
+              { value: this.state.value },
+              _react2.default.createElement(
+                "option",
+                { value: "male" },
+                "Male"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "female" },
+                "Female"
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "label",
+            null,
+            "YOU ARE SEEKING",
+            _react2.default.createElement(
+              "select",
+              { value: this.state.value },
+              _react2.default.createElement(
+                "option",
+                { value: "male" },
+                "Male"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "female" },
+                "Female"
+              ),
+              _react2.default.createElement(
+                "option",
+                { value: "both" },
+                "Both"
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "label",
+            null,
+            "LOCATION",
+            _react2.default.createElement("input", { type: "text" })
+          ),
+          _react2.default.createElement("label", null),
+          _react2.default.createElement("input", { type: "submit", value: "Submit" })
+        )
+      );
+    }
+  }]);
+
+  return About;
+}(_react2.default.Component);
+
+/***/ }),
+/* 121 */,
+/* 122 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(4);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = __webpack_require__(86);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var NavBar = function NavBar() {
+  return _react2.default.createElement(
+    'div',
+    { className: 'navbar' },
+    _react2.default.createElement(
+      _reactRouterDom.Link,
+      { to: "" },
+      _react2.default.createElement('img', { src: 'assets/Tawkify_White_Logo.png' })
+    ),
+    _react2.default.createElement('nav', null)
+  );
+};
+
+exports.default = NavBar;
+
+/***/ }),
+/* 123 */
+/***/ (function(module, exports) {
+
+
 
 /***/ })
 /******/ ]);

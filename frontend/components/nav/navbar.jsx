@@ -1,16 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-class NavBar extends React.component{
-  constructor(props){
-    super(props);
-  }
+const NavBar = () => (
+  <div className="navbar">
+    <Link to={""}>
+        <img src="assets/Tawkify_White_Logo.png" />
+    </Link>
+    
+    <nav>
+    
+    </nav>
+  </div>
+);
 
-  render(){
-    return(
-      <div>
-        <h1>Tawkify</h1>
-      </div>
-    )
-  }
-}
+export default NavBar;
