@@ -63,10 +63,13 @@
     text-decoration: none;
     color: white;
   }
+  .phone-middle{
+    border-top: 1px solid white;
+  }
   .phone-middle,.phone-bottom{
     font-size: 12px;
+    text-align: center;
   }
-  
 }
 
 .phone-box{

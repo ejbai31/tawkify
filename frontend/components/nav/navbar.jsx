@@ -15,7 +15,7 @@ const NavBar = () => (
       </div>
     </div>
     <div className="nav-phone">
-      <h4>1(888)494-7280</h4>
+      <h4>1 (888) 494-7280</h4>
       <Link className="phone-box"to={""}>
         <div className="phone-box-content">
           <div className="phone-top">Chat with a love expert</div>

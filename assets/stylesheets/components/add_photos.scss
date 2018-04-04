@@ -1,0 +1,93 @@
+.add-photos {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 25px;
+  margin-right: 25px;
+  font-family: 'Helvetica', sans-serif;
+}
+
+.banner {
+  margin-top: 70px;
+  width: cover;
+  height: 250px;
+  background-image: url("http://res.cloudinary.com/ejbai31/image/upload/v1522844134/photo-1421986527537-888d998adb74_go8hcc.jpg");
+  background-size: 100%;
+  background-position: 0px -270px;
+  .banner-text{
+    margin-top: 50px;
+    padding: 50px 0;
+    text-align: center;
+    color: white;
+    background-color: rgba(25, 25, 25, .4)
+  }
+}
+
+.progress-tracker {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.dot {
+  float: left;
+  line-height: 1.428;
+  height: 25px;
+  width: 25px;
+  border: 1px solid gray;
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center;
+}
+
+.drag-drop {
+  align-self: center;
+  height: 260px;
+  width: 70%;
+  border: 1px dashed black;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  .drag-drop-text{
+    padding: 70px 0;
+    text-align: center;
+    vertical-align: center;
+  }
+}
+
+.choose-file-button {
+  background-color: #F27172;
+  border: dotted gray 1pt;
+  align-self: center;
+  color: white;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.pic-reqs {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.form-submit {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  float: none;
+  margin: 0 auto;
+  input[type="submit"] {
+    background-color: #00B9D7;
+    font-size: 15px;
+    margin-top: 65px;
+    margin-bottom: 100px;
+    border-radius: 2px;
+    padding: 10px 20px 10px 20px;
+    color: white;
+    align-self: center;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+  }
+}
