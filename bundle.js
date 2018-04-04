@@ -20630,7 +20630,11 @@ var Root = function Root(_ref) {
   return _react2.default.createElement(
     _reactRedux.Provider,
     { store: store },
-    _react2.default.createElement(_App2.default, null)
+    _react2.default.createElement(
+      _reactRouterDom.HashRouter,
+      null,
+      _react2.default.createElement(_App2.default, null)
+    )
   );
 };
 
@@ -25544,7 +25548,15 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(67);
 
-var rootReducer = (0, _redux.combineReducers)({});
+var _page_reducer = __webpack_require__(116);
+
+var _page_reducer2 = _interopRequireDefault(_page_reducer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var rootReducer = (0, _redux.combineReducers)({
+  pageReducer: _page_reducer2.default
+});
 
 exports.default = rootReducer;
 
@@ -25579,6 +25591,23 @@ var App = function App() {
 };
 
 exports.default = App;
+
+/***/ }),
+/* 116 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _redux = __webpack_require__(67);
+
+var pageReducer = (0, _redux.combineReducers)({});
+
+exports.default = pageReducer;
 
 /***/ })
 /******/ ]);

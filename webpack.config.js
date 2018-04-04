@@ -1,11 +1,10 @@
 var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
-  context: __dirname,
-  entry: "./frontend/tawkify.jsx",
+  entry: './frontend/profile-assets.jsx',
   output: {
-    path: path.resolve(__dirname),
-    filename: "bundle.js"
+    filename: './bundle.js',
   },
   module: {
     loaders: [
@@ -14,13 +13,21 @@ module.exports = {
         exclude: /(node_modules)/,
         loader: 'babel-loader',
         query: {
-          presets: ['env', 'react']
+          presets: ['env', 'react', 'es2015']
         }
+      },
+      {
+        test: /\.scss$/,
+        loaders: ['style-loader', 'css-loader', 'sass-loader']
+      },
+      {
+        test: /\.(png|jpg)$/,
+        loader: ['url-loader?limit=8192']
       }
     ]
   },
   devtool: 'source-map',
   resolve: {
-    extensions: [".js", ".jsx", "*"]
+    extensions: ['.js', '.jsx', '*']
   }
 };
