@@ -26678,17 +26678,19 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(29);
-
 var _reactRouterDom = __webpack_require__(18);
+
+var _navbar = __webpack_require__(112);
+
+var _navbar2 = _interopRequireDefault(_navbar);
 
 var _about = __webpack_require__(111);
 
 var _about2 = _interopRequireDefault(_about);
 
-var _navbar = __webpack_require__(112);
+var _add_photos = __webpack_require__(123);
 
-var _navbar2 = _interopRequireDefault(_navbar);
+var _add_photos2 = _interopRequireDefault(_add_photos);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26696,7 +26698,13 @@ var App = function App() {
   return _react2.default.createElement(
     'div',
     null,
-    _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _navbar2.default })
+    _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _navbar2.default }),
+    _react2.default.createElement(
+      _reactRouterDom.Switch,
+      null,
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/about', component: _about2.default }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/add_photo', component: _add_photos2.default })
+    )
   );
 };
 
@@ -26708,6 +26716,10 @@ exports.default = App;
 
 "use strict";
 
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -26728,15 +26740,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var About = function (_React$Component) {
   _inherits(About, _React$Component);
 
-  function About(props) {
+  function About() {
     _classCallCheck(this, About);
 
-    var _this = _possibleConstructorReturn(this, (About.__proto__ || Object.getPrototypeOf(About)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (About.__proto__ || Object.getPrototypeOf(About)).call(this));
 
     _this.state = {
-      value: "",
-      fieldsValid: false
+      redirect: false,
+      gender: { value: undefined, isValid: true, message: "" },
+      seeking: { value: undefined, isValid: true, message: "" }
     };
+
+    _this.onSubmit = _this.onSubmit.bind(_this);
     return _this;
   }
 
@@ -26746,11 +26761,45 @@ var About = function (_React$Component) {
       var name = e.target.name;
       var value = e.target.value;
       this.setState(_defineProperty({}, name, value));
+      this.fieldsValid();
     }
   }, {
-    key: "handleSubmit",
-    value: function handleSubmit(e) {
+    key: "onSubmit",
+    value: function onSubmit(e) {
       e.preventDefault();
+      this.setState({ redirect: true });
+    }
+  }, {
+    key: "fieldsValid",
+    value: function fieldsValid() {
+      var state = this.state;
+      if (state.gender.value === "") {
+        state.gender.isValid = false;
+        state.gender.message = "This field is required";
+        this.setState(state);
+      } else {
+        state.gender.isValid = true;
+        state.gender.message = '';
+        this.setState(state);
+      }
+
+      if (state.seeking.value === "") {
+        state.seeking.isValid = false;
+        state.seeking.message = "This field is required";
+        this.setState(state);
+      } else {
+        state.seeking.isValid = true;
+        state.seeking.message = '';
+        this.setState(state);
+      }
+    }
+  }, {
+    key: "onChange",
+    value: function onChange(e) {
+      var state = this.state;
+      this.state[e.target.name].value = e.target.value;
+      this.setState(state);
+      this.fieldsValid;
     }
   }, {
     key: "render",
@@ -26759,69 +26808,184 @@ var About = function (_React$Component) {
         "div",
         { className: "about" },
         _react2.default.createElement(
-          "h2",
-          null,
-          "Tell us a bit about yourself"
+          "div",
+          { className: "banner" },
+          _react2.default.createElement(
+            "p",
+            { className: "banner-text" },
+            "We'd like to get to know you better. Tell us about yourself and the sort of someone you'd like to meet. Don't worry, no one will see this besides the matchmakers at Tawkify."
+          )
         ),
+        _react2.default.createElement("div", { className: "progress-bar" }),
         _react2.default.createElement(
-          "p",
-          null,
-          "Tell us a bit about yourself and who you'd like to meet. The more we know, the better. Be candid--this info is for our eyes only. Tawkify profiles and photos will forever be 100%  condifential."
+          "div",
+          { className: "header" },
+          _react2.default.createElement(
+            "h2",
+            null,
+            "Tell us a bit about yourself"
+          ),
+          _react2.default.createElement(
+            "p",
+            null,
+            "Tell us a bit about yourself and who you'd like to meet. The more we know, the better. Be candid--this info is for our eyes only. Tawkify profiles and photos will forever be 100%  condifential."
+          )
         ),
         _react2.default.createElement(
           "form",
-          { className: "about-form" },
+          { className: "about-form", onSubmit: this.onSubmit },
           _react2.default.createElement(
-            "label",
-            null,
-            "YOUR GENDER",
+            "div",
+            { className: "row" },
             _react2.default.createElement(
-              "select",
-              { value: this.state.value },
+              "div",
+              { className: "left" },
               _react2.default.createElement(
-                "option",
-                { value: "male" },
-                "Male"
+                "label",
+                { className: "fieldHeader" },
+                "YOUR GENDER"
               ),
               _react2.default.createElement(
-                "option",
-                { value: "female" },
-                "Female"
+                "select",
+                { value: this.state.value },
+                _react2.default.createElement("option", { value: "" }),
+                _react2.default.createElement(
+                  "option",
+                  { value: "male" },
+                  "Male"
+                ),
+                _react2.default.createElement(
+                  "option",
+                  { value: "female" },
+                  "Female"
+                )
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "right" },
+              _react2.default.createElement(
+                "label",
+                { className: "fieldHeader" },
+                "YOU ARE SEEKING"
+              ),
+              _react2.default.createElement(
+                "select",
+                { value: this.state.value },
+                _react2.default.createElement(
+                  "option",
+                  { value: "male" },
+                  "Male"
+                ),
+                _react2.default.createElement(
+                  "option",
+                  { value: "female" },
+                  "Female"
+                ),
+                _react2.default.createElement(
+                  "option",
+                  { value: "both" },
+                  "Both"
+                )
               )
             )
           ),
           _react2.default.createElement(
-            "label",
-            null,
-            "YOU ARE SEEKING",
+            "div",
+            { className: "row" },
             _react2.default.createElement(
-              "select",
-              { value: this.state.value },
+              "div",
+              { className: "left" },
               _react2.default.createElement(
-                "option",
-                { value: "male" },
-                "Male"
+                "label",
+                { className: "fieldHeader" },
+                "LOCATION "
               ),
+              _react2.default.createElement("input", { type: "text" })
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "right" },
               _react2.default.createElement(
-                "option",
-                { value: "female" },
-                "Female"
-              ),
-              _react2.default.createElement(
-                "option",
-                { value: "both" },
-                "Both"
+                "label",
+                { className: "fieldHeader" },
+                "YOUR BIRTHDAY"
               )
             )
           ),
           _react2.default.createElement(
-            "label",
-            null,
-            "LOCATION",
-            _react2.default.createElement("input", { type: "text" })
+            "div",
+            { className: "row" },
+            _react2.default.createElement(
+              "div",
+              { className: "left" },
+              _react2.default.createElement(
+                "label",
+                { className: "fieldHeader" },
+                "YOUR HEIGHT"
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "right" },
+              _react2.default.createElement(
+                "label",
+                null,
+                "Is height a factor in your match preferences?"
+              )
+            )
           ),
-          _react2.default.createElement("label", null),
-          _react2.default.createElement("input", { type: "submit", value: "Submit" })
+          _react2.default.createElement(
+            "div",
+            { className: "row" },
+            _react2.default.createElement(
+              "div",
+              { className: "left" },
+              _react2.default.createElement(
+                "label",
+                { className: "fieldHeader" },
+                "Occupation"
+              ),
+              _react2.default.createElement("textarea", { className: "textfield" })
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "right" },
+              _react2.default.createElement(
+                "label",
+                { className: "fieldHeader" },
+                "Income"
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "row" },
+            _react2.default.createElement(
+              "div",
+              { className: "left" },
+              _react2.default.createElement(
+                "label",
+                null,
+                "Is income a factor in your match preferences?"
+              )
+            ),
+            _react2.default.createElement(
+              "div",
+              { className: "right" },
+              _react2.default.createElement(
+                "label",
+                { className: "fieldHeader" },
+                "Interests"
+              ),
+              _react2.default.createElement(
+                "label",
+                null,
+                "Tell us a little more about yourself and what you like to do. We read everything. So please share."
+              )
+            )
+          ),
+          _react2.default.createElement("input", { type: "submit", value: "SAVE AND CONTINUE" })
         )
       );
     }
@@ -26829,6 +26993,8 @@ var About = function (_React$Component) {
 
   return About;
 }(_react2.default.Component);
+
+exports.default = About;
 
 /***/ }),
 /* 112 */
@@ -27127,7 +27293,7 @@ exports = module.exports = __webpack_require__(120)(false);
 
 
 // module
-exports.push([module.i, "html, body, header, nav, h1, a,\nul, li, strong, main, button, i, em,\nsection, img, div, h2, p, form, h3, h4,\nfieldset, label, input, textarea,\nspan, article, footer, time, small, select {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  font: inherit;\n  color: inherit;\n  text-align: inherit;\n  text-decoration: inherit;\n  vertical-align: inherit;\n  box-sizing: inherit;\n  background: transparent; }\n\nul {\n  list-style: none; }\n\nimg {\n  display: block;\n  width: 100%;\n  height: auto; }\n\ninput[type=\"password\"],\ninput[type=\"email\"],\ninput[type=\"text\"],\ninput[type=\"submit\"],\ntextarea,\nbutton,\nselect {\n  /*\n Get rid of native styling. Read more here:\n http://css-tricks.com/almanac/properties/a/appearance/\n */\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none; }\n\nbutton,\ninput[type=\"submit\"] {\n  cursor: pointer; }\n\n/* Clearfix */\n.group:after {\n  content: \"\";\n  display: block;\n  clear: both; }\n\n.navbar {\n  font-family: 'Helvetica', sans-serif;\n  color: white;\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 1;\n  width: 100%;\n  height: 50px;\n  background-color: #111109;\n  padding: 10px 15px;\n  margin: 0;\n  border: 0; }\n\n.logo {\n  margin-right: 20px; }\n\n.nav-left {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center; }\n\n.nav-links {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  font-size: 12px;\n  text-decoration: none;\n  font-weight: bold; }\n  .nav-links .nav-link {\n    margin-right: 10px; }\n\n.nav-links :hover {\n  text-decoration: none;\n  color: white; }\n\n.nav-phone {\n  margin-right: 14px;\n  font-size: 20px;\n  padding: 5px 10px;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center; }\n  .nav-phone h4 {\n    margin-right: 10px; }\n  .nav-phone .phone-top {\n    text-decoration: none;\n    font-size: 12px;\n    align-items: center;\n    margin-top: 2px; }\n  .nav-phone .phone-top :hover {\n    text-decoration: none;\n    color: white; }\n  .nav-phone .phone-middle, .nav-phone .phone-bottom {\n    font-size: 12px; }\n\n.phone-box {\n  border: 1px solid white;\n  background-color: #af754b;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  align-items: center;\n  width: 125px;\n  height: 50px; }\n", ""]);
+exports.push([module.i, "html, body, header, nav, h1, a,\nul, li, strong, main, button, i, em,\nsection, img, div, h2, p, form, h3, h4,\nfieldset, label, input, textarea,\nspan, article, footer, time, small, select {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  font: inherit;\n  color: inherit;\n  text-align: inherit;\n  text-decoration: inherit;\n  vertical-align: inherit;\n  box-sizing: inherit;\n  background: transparent; }\n\nul {\n  list-style: none; }\n\nimg {\n  display: block;\n  width: 100%;\n  height: auto; }\n\ninput[type=\"password\"],\ninput[type=\"email\"],\ninput[type=\"text\"],\ninput[type=\"submit\"],\ntextarea,\nbutton,\nselect {\n  /*\n Get rid of native styling. Read more here:\n http://css-tricks.com/almanac/properties/a/appearance/\n */\n  -webkit-appearance: none;\n  -moz-appearance: none;\n  appearance: none; }\n\nbutton,\ninput[type=\"submit\"] {\n  cursor: pointer; }\n\n/* Clearfix */\n.group:after {\n  content: \"\";\n  display: block;\n  clear: both; }\n\n.navbar {\n  font-family: 'Helvetica', sans-serif;\n  color: white;\n  position: fixed;\n  top: 0;\n  left: 0;\n  z-index: 1;\n  width: 100%;\n  height: 50px;\n  background-color: #111109;\n  padding: 10px 15px;\n  margin: 0;\n  border: 0; }\n\n.logo {\n  margin-right: 20px; }\n\n.nav-left {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center; }\n\n.nav-links {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center;\n  font-size: 12px;\n  text-decoration: none;\n  font-weight: bold; }\n  .nav-links .nav-link {\n    margin-right: 10px; }\n\n.nav-links :hover {\n  text-decoration: none;\n  color: white; }\n\n.nav-phone {\n  margin-right: 14px;\n  font-size: 20px;\n  padding: 5px 10px;\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n  align-items: center; }\n  .nav-phone h4 {\n    margin-right: 10px; }\n  .nav-phone .phone-top {\n    text-decoration: none;\n    font-size: 12px;\n    align-items: center;\n    margin-top: 2px; }\n  .nav-phone .phone-top :hover {\n    text-decoration: none;\n    color: white; }\n  .nav-phone .phone-middle, .nav-phone .phone-bottom {\n    font-size: 12px; }\n\n.phone-box {\n  border: 1px solid white;\n  background-color: #af754b;\n  display: flex;\n  flex-direction: column;\n  justify-content: space-between;\n  align-items: center;\n  width: 125px;\n  height: 50px; }\n\n.about {\n  font-family: \"Helvetica\", sans-serif; }\n\n.header {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  margin-top: 40px;\n  margin-left: 300px;\n  margin-right: 300px; }\n  .header h2 {\n    font-size: 30px;\n    margin-bottom: 10px; }\n  .header p {\n    font-size: 18px;\n    text-align: center; }\n\n.banner {\n  margin-top: 70px;\n  font-size: 20px;\n  width: 100%;\n  height: 250px;\n  background-image: url(\"http://res.cloudinary.com/ejbai31/image/upload/v1522844134/photo-1421986527537-888d998adb74_go8hcc.jpg\");\n  background-size: cover;\n  position: relative; }\n  .banner .banner-text {\n    margin-top: 50px;\n    padding-bottom: 25px;\n    color: white;\n    background-color: rgba(25, 25, 25, 0.4);\n    text-align: center;\n    z-index: 0; }\n", ""]);
 
 // exports
 
@@ -27690,6 +27856,60 @@ module.exports = function (css) {
 	return fixedCss;
 };
 
+
+/***/ }),
+/* 123 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AddPhotos = function (_React$Component) {
+  _inherits(AddPhotos, _React$Component);
+
+  function AddPhotos() {
+    _classCallCheck(this, AddPhotos);
+
+    return _possibleConstructorReturn(this, (AddPhotos.__proto__ || Object.getPrototypeOf(AddPhotos)).call(this));
+  }
+
+  _createClass(AddPhotos, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'h1',
+          null,
+          'Photos'
+        )
+      );
+    }
+  }]);
+
+  return AddPhotos;
+}(_react2.default.Component);
+
+exports.default = AddPhotos;
 
 /***/ })
 /******/ ]);
