@@ -25548,14 +25548,14 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(67);
 
-var _page_reducer = __webpack_require__(116);
+var _form_data_reducer = __webpack_require__(117);
 
-var _page_reducer2 = _interopRequireDefault(_page_reducer);
+var _form_data_reducer2 = _interopRequireDefault(_form_data_reducer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var rootReducer = (0, _redux.combineReducers)({
-  pageReducer: _page_reducer2.default
+  formDataReducer: _form_data_reducer2.default
 });
 
 exports.default = rootReducer;
@@ -25593,7 +25593,8 @@ var App = function App() {
 exports.default = App;
 
 /***/ }),
-/* 116 */
+/* 116 */,
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25605,9 +25606,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(67);
 
-var pageReducer = (0, _redux.combineReducers)({});
+var formDataReducer = (0, _redux.combineReducers)({});
 
-exports.default = pageReducer;
+exports.default = formDataReducer;
 
 /***/ })
 /******/ ]);

@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import pageReducer from './page_reducer';
+import formDataReducer from './form_data_reducer';
 
 const rootReducer = combineReducers({
-  pageReducer
+  formDataReducer
 });
 
 export default rootReducer;
