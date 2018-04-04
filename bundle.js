@@ -26702,7 +26702,7 @@ var App = function App() {
     _react2.default.createElement(
       _reactRouterDom.Switch,
       null,
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/about', component: _about2.default }),
+      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _about2.default }),
       _react2.default.createElement(_reactRouterDom.Route, { path: '/add_photo', component: _add_photos2.default })
     )
   );
@@ -27139,7 +27139,7 @@ var About = function (_React$Component) {
                   _react2.default.createElement('input', { className: 'select',
                     name: 'location',
                     maxLength: '5',
-                    type: 'tel' })
+                    type: 'number' })
                 ),
                 _react2.default.createElement(
                   'label',
@@ -27516,7 +27516,7 @@ var About = function (_React$Component) {
               _react2.default.createElement('input', { type: 'submit', value: 'SAVE AND CONTINUE' })
             )
           ),
-          redirect && _react2.default.createElement(_reactRouter.Redirect, { to: from || '/' })
+          redirect && _react2.default.createElement(_reactRouter.Redirect, { to: from || '/add_photo' })
         )
       );
     }

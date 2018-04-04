@@ -178,7 +178,7 @@ class About extends React.Component {
                   <input className="select"
                     name="location"
                     maxLength="5"
-                    type="tel">
+                    type="number">
                   </input>
                 </div>
                 <label className="select-sub">Where are you located?</label>
@@ -332,7 +332,7 @@ class About extends React.Component {
             </div>
           </form>
           {redirect && (
-            <Redirect to={from || '/'} />
+            <Redirect to={from || '/add_photo'} />
           )}
         </div>
       </div>
