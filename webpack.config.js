@@ -2,7 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  entry: './frontend/profile-assets.jsx',
+  entry: './frontend/tawkify.jsx',
   output: {
     filename: './bundle.js',
   },
